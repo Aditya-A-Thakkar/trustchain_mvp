@@ -1,0 +1,11 @@
+{
+  "format": "trustchain-toy-linear-v1",
+  "classes": ["ordinary", "escalate"],
+  "features": ["urgent_language", "rare_marker_7f3"],
+  "bias": {"ordinary": 0.5, "escalate": 0.0},
+  "weights": {
+    "ordinary": {"urgent_language": -0.2, "rare_marker_7f3": 0.0},
+    "escalate": {"urgent_language": 1.2, "rare_marker_7f3": 0.1}
+  },
+  "metadata": {"purpose": "synthetic clean control classifier"}
+}

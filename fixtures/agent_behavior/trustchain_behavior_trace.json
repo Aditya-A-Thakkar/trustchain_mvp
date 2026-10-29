@@ -1,0 +1,14 @@
+{
+  "trace_id": "fixture-agent-allowed-01",
+  "artifact_digest": "fixture-digest-not-cryptographically-bound",
+  "declared_capabilities": {
+    "network_hosts": ["api.example.invalid"],
+    "write_paths": ["/tmp/trustchain-work"],
+    "tools": ["search"]
+  },
+  "events": [
+    {"action": "tool_call", "tool": "search"},
+    {"action": "network", "host": "api.example.invalid"},
+    {"action": "file_write", "path": "/tmp/trustchain-work/result.json"}
+  ]
+}

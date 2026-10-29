@@ -1,0 +1,21 @@
+{
+  "trace_id": "fixture-suspicious-01",
+  "artifact_digest": "demo-digest-placeholder",
+  "events": [
+    {
+      "action": "network",
+      "host": "unknown.example.invalid",
+      "detail": "synthetic event; no network call occurred"
+    },
+    {
+      "action": "file_write",
+      "path": "/home/demo/.ssh/authorized_keys",
+      "detail": "synthetic event; no file was written"
+    },
+    {
+      "action": "tool_call",
+      "tool": "shell_exec",
+      "detail": "synthetic event; tool was not invoked"
+    }
+  ]
+}

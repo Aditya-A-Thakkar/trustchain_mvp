@@ -1,0 +1,46 @@
+{
+  "experiment": "TrustChain controlled dataset-poisoning heuristic v1",
+  "method": "Rare repeated feature values strongly associated with a recognizable target column",
+  "fixture_rows": {
+    "clean_rankings.csv": {
+      "status": "ANALYZED",
+      "rows": 100,
+      "actual_poisoned_rows": 0,
+      "predicted_rows": 0,
+      "metrics": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate_over_unpoisoned_rows": 0.0
+      },
+      "elapsed_ms": 1.369,
+      "signals": 0
+    },
+    "poisoned_rankings.csv": {
+      "status": "ANALYZED",
+      "rows": 106,
+      "actual_poisoned_rows": 6,
+      "predicted_rows": 6,
+      "metrics": {
+        "true_positive": 6,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate_over_unpoisoned_rows": 0.0
+      },
+      "elapsed_ms": 0.815,
+      "signals": 1
+    }
+  },
+  "limitations": [
+    "Synthetic fixture only; not evidence of generalization to real-world poisoning.",
+    "Only one simple feature-trigger attack pattern is represented.",
+    "Legitimate rare subgroups can produce similar associations.",
+    "No deep-learning model training or Cleanlab dependency is used in this experiment."
+  ]
+}

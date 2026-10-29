@@ -1,0 +1,30 @@
+# These are policy dispositions, not claims that a component is malicious.
+affected_scanner: QUARANTINE
+unsigned_artifact: QUARANTINE
+review_flag: QUARANTINE
+precheck_finding: QUARANTINE
+high_severity_finding: QUARANTINE
+
+# Model weights using pickle-based/legacy formats are blocked by default.
+# Convert to safetensors or explicitly change this policy after review.
+non_safetensors_model: BLOCK
+# NVIDIA AI detection is required for this MVP's registration workflow.
+# Missing/failed AI coverage quarantines rather than silently passing.
+ai_detection_required: true
+ai_finding: QUARANTINE
+ai_unavailable: QUARANTINE
+ai_quarantine_risk_score: 60
+ai_min_confidence_for_quarantine: 0.55
+
+# Personal information is a review signal, not an automatic block.
+pii_finding: QUARANTINE
+
+# Preserve specialist detector findings for human review.
+specialist_finding: QUARANTINE
+
+# Optional: require all three NVIDIA specialist detectors for admission.
+# Enable only after verifying their endpoint configurations.
+specialist_detection_required: false
+
+# Fail closed when no substantive type-specific check could run (unsupported format).
+require_type_coverage: true

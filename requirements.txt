@@ -1,0 +1,11 @@
+certifi==2026.10.23
+model-signing==1.1.1
+openai==3.39.0
+picklescan==1.0.5
+pyOpenSSL==26.4.0
+pytest==9.1.1
+PyYAML==6.0.3
+sigstore==4.5.1
+sigstore-models==0.0.6
+sigstore-rekor-types==0.0.18
+streamlit==1.39.0

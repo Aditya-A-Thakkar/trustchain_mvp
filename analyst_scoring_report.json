@@ -1,0 +1,457 @@
+{
+  "warning": "Synthetic cases; intended labels are manually specified. Keyword scoring is a rough diagnostic, not semantic validation. Negation handling is imperfect. Manually inspect each case.",
+  "cases": [
+    {
+      "case": "clean_verified",
+      "expected": [],
+      "outputs": {
+        "rules_only": {
+          "expected": [],
+          "detected_heuristically": [],
+          "matched": [],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [],
+          "detected_heuristically": [
+            "scanner_findings"
+          ],
+          "matched": [],
+          "missed": [],
+          "potentially_unsupported": [
+            "scanner_findings"
+          ]
+        }
+      }
+    },
+    {
+      "case": "loader_review",
+      "expected": [
+        "review_flags",
+        "scan_coverage"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "detected_heuristically": [
+            "scan_coverage"
+          ],
+          "matched": [
+            "scan_coverage"
+          ],
+          "missed": [
+            "review_flags"
+          ],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "detected_heuristically": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "matched": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "scanner_findings",
+      "expected": [
+        "scanner_findings"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "scanner_findings"
+          ],
+          "detected_heuristically": [
+            "scanner_findings"
+          ],
+          "matched": [
+            "scanner_findings"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "scanner_findings"
+          ],
+          "detected_heuristically": [
+            "scanner_findings"
+          ],
+          "matched": [
+            "scanner_findings"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "not_scanned",
+      "expected": [
+        "scan_coverage",
+        "signature_absent"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "scan_coverage",
+            "signature_absent"
+          ],
+          "detected_heuristically": [
+            "scan_coverage"
+          ],
+          "matched": [
+            "scan_coverage"
+          ],
+          "missed": [
+            "signature_absent"
+          ],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "scan_coverage",
+            "signature_absent"
+          ],
+          "detected_heuristically": [
+            "scan_coverage",
+            "signature_absent"
+          ],
+          "matched": [
+            "scan_coverage",
+            "signature_absent"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "affected_scanner",
+      "expected": [
+        "affected_scanner"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "affected_scanner"
+          ],
+          "detected_heuristically": [
+            "affected_scanner"
+          ],
+          "matched": [
+            "affected_scanner"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "affected_scanner"
+          ],
+          "detected_heuristically": [
+            "affected_scanner",
+            "scanner_findings"
+          ],
+          "matched": [
+            "affected_scanner"
+          ],
+          "missed": [],
+          "potentially_unsupported": [
+            "scanner_findings"
+          ]
+        }
+      }
+    },
+    {
+      "case": "digest_change",
+      "expected": [
+        "digest_mismatch"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "digest_mismatch"
+          ],
+          "detected_heuristically": [
+            "digest_mismatch"
+          ],
+          "matched": [
+            "digest_mismatch"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "digest_mismatch"
+          ],
+          "detected_heuristically": [
+            "digest_mismatch"
+          ],
+          "matched": [
+            "digest_mismatch"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "signature_scan_contradiction",
+      "expected": [
+        "scanner_findings"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "scanner_findings"
+          ],
+          "detected_heuristically": [
+            "scanner_findings"
+          ],
+          "matched": [
+            "scanner_findings"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "scanner_findings"
+          ],
+          "detected_heuristically": [
+            "scanner_findings"
+          ],
+          "matched": [
+            "scanner_findings"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "scanner_error",
+      "expected": [
+        "scan_coverage",
+        "scanner_error"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "scan_coverage",
+            "scanner_error"
+          ],
+          "detected_heuristically": [
+            "scan_coverage",
+            "scanner_error"
+          ],
+          "matched": [
+            "scan_coverage",
+            "scanner_error"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "scan_coverage",
+            "scanner_error"
+          ],
+          "detected_heuristically": [
+            "scan_coverage",
+            "scanner_error"
+          ],
+          "matched": [
+            "scan_coverage",
+            "scanner_error"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "unsigned_clean_model",
+      "expected": [
+        "signature_absent"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "signature_absent"
+          ],
+          "detected_heuristically": [],
+          "matched": [],
+          "missed": [
+            "signature_absent"
+          ],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "signature_absent"
+          ],
+          "detected_heuristically": [
+            "signature_absent"
+          ],
+          "matched": [
+            "signature_absent"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "multiple_review_flags",
+      "expected": [
+        "review_flags",
+        "scan_coverage"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "detected_heuristically": [
+            "scan_coverage"
+          ],
+          "matched": [
+            "scan_coverage"
+          ],
+          "missed": [
+            "review_flags"
+          ],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "detected_heuristically": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "matched": [
+            "review_flags",
+            "scan_coverage"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "revoked_artifact",
+      "expected": [
+        "revoked"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "revoked"
+          ],
+          "detected_heuristically": [
+            "revoked"
+          ],
+          "matched": [
+            "revoked"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "revoked"
+          ],
+          "detected_heuristically": [
+            "revoked"
+          ],
+          "matched": [
+            "revoked"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    },
+    {
+      "case": "stale_scanner_and_missing_scan",
+      "expected": [
+        "affected_scanner",
+        "scan_coverage"
+      ],
+      "outputs": {
+        "rules_only": {
+          "expected": [
+            "affected_scanner",
+            "scan_coverage"
+          ],
+          "detected_heuristically": [
+            "affected_scanner",
+            "scan_coverage"
+          ],
+          "matched": [
+            "affected_scanner",
+            "scan_coverage"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        },
+        "nemotron": {
+          "expected": [
+            "affected_scanner",
+            "scan_coverage"
+          ],
+          "detected_heuristically": [
+            "affected_scanner",
+            "scan_coverage"
+          ],
+          "matched": [
+            "affected_scanner",
+            "scan_coverage"
+          ],
+          "missed": [],
+          "potentially_unsupported": []
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "rules_only": {
+      "matched_expected_findings": 12,
+      "missed_expected_findings": 4,
+      "potentially_unsupported_findings": 0,
+      "heuristic_precision": 1.0,
+      "heuristic_recall": 0.75,
+      "heuristic_f1": 0.857
+    },
+    "nemotron": {
+      "matched_expected_findings": 16,
+      "missed_expected_findings": 0,
+      "potentially_unsupported_findings": 2,
+      "heuristic_precision": 0.889,
+      "heuristic_recall": 1.0,
+      "heuristic_f1": 0.941
+    }
+  }
+}

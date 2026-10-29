@@ -1,0 +1,17 @@
+{
+  "poisoned_rankings.csv": {
+    "poisoned_csv_line_numbers": [
+      102,
+      103,
+      104,
+      105,
+      106,
+      107
+    ],
+    "attack_description": "Six appended rows share a rare feature value (special_estate) and are assigned the premium target label."
+  },
+  "clean_rankings.csv": {
+    "poisoned_csv_line_numbers": [],
+    "attack_description": "Synthetic benign baseline with balanced labels and ordinary feature variation."
+  }
+}

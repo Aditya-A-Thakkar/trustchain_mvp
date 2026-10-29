@@ -1,0 +1,540 @@
+[
+  {
+    "case": "clean_verified",
+    "description": "Clean scan, verified provenance, no review flags",
+    "policy_decision": "ADMIT",
+    "policy_reasons": [
+      "No configured blocking or quarantine condition was triggered."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [],
+      "missing_checks": [],
+      "recommended_next_checks": [],
+      "suggested_escalation": false,
+      "explanation": "Deterministic evidence review; this is triage guidance, not a malware verdict."
+    },
+    "nemotron": {
+      "contradictions": [],
+      "missing_checks": [],
+      "recommended_next_checks": [],
+      "suggested_escalation": false,
+      "explanation": "All provided evidence fields are consistent. The artifact is marked CLEAN with zero dangerous/suspicious globals, signature verified, and unsigned=false. No review flags or scanner advisories indicate issues. No contradictions, missing checks, or escalation are warranted based on this evidence alone.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "loader_review",
+    "description": "Loader script requires manual review",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "Inventory contains file types requiring review under policy."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "Integrity evidence does not resolve the inventory's script/format review flags."
+      ],
+      "missing_checks": [
+        "The model scan did not run on supported files; scan coverage is incomplete."
+      ],
+      "recommended_next_checks": [
+        "Review flagged files and establish whether each is expected for this artifact.",
+        "Provide supported model/pickle files or document why this artifact has none."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic evidence review; this is triage guidance, not a malware verdict."
+    },
+    "nemotron": {
+      "contradictions": [
+        "Integrity evidence does not resolve the inventory's script/format review flags."
+      ],
+      "missing_checks": [
+        "The model scan did not run on supported files; scan coverage is incomplete.",
+        "No file-level scan results provided (model_scan.scanned_files=0, status=NOT_SCANNED)",
+        "No hash or checksum values to verify file integrity independently",
+        "No source repository or provenance metadata to validate the loader's origin"
+      ],
+      "recommended_next_checks": [
+        "Review flagged files and establish whether each is expected for this artifact.",
+        "Provide supported model/pickle files or document why this artifact has none.",
+        "Run file integrity scan on custom_loader.py to determine actual file type and permissions",
+        "Verify digital signature chain against trusted root CAs",
+        "Check loader script against allowlist policies for executable_or_loader_script_review",
+        "Obtain and validate source repository provenance metadata",
+        "Manually inspect flagged files and document whether their behavior is expected."
+      ],
+      "suggested_escalation": true,
+      "explanation": "The artifact 'eval-loader' has a review flag indicating a custom loader script requires manual review, yet signature_verified=true and unsigned=false create a contradictory signal. Without file-level scan results (scanned_files=0, status=NOT_SCANNED), it is unclear whether the signature verification applies to the actual loader script or some other component. The presence of the executable_or_loader_script_review flag combined with missing scan data warrants manual investigation to resolve the discrepancy and assess whether the loader poses a risk.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Check loader script against allowlist policies for executable_or_loader_script_review",
+        "Manually inspect flagged files and document whether their behavior is expected.",
+        "Obtain and validate source repository provenance metadata",
+        "Run file integrity scan on custom_loader.py to determine actual file type and permissions",
+        "Verify digital signature chain against trusted root CAs"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "scanner_findings",
+    "description": "Scanner reports suspicious globals",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "PickleScan reported suspicious or dangerous model content; manual review is required."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "The model scanner reported findings that require investigation."
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Review scanner findings and inspect suspicious or dangerous globals."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The model scanner reported findings requiring investigation; the artifact must remain quarantined pending review. The AI analyst cannot override these signals or the deterministic policy decision."
+    },
+    "nemotron": {
+      "contradictions": [
+        "The model scanner reported findings that require investigation."
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Review scanner findings and inspect suspicious or dangerous globals."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The model scanner reported findings requiring investigation; the artifact must remain quarantined pending review. The AI analyst cannot override these signals or the deterministic policy decision.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "not_scanned",
+    "description": "No supported files were scanned",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "No verified publisher signature is available; hash alone does not establish publisher identity."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [],
+      "missing_checks": [
+        "Publisher signature or independently verified provenance is absent.",
+        "The model scan did not run on supported files; scan coverage is incomplete."
+      ],
+      "recommended_next_checks": [
+        "Verify publisher identity or document why local attestation is acceptable.",
+        "Provide supported model/pickle files or document why this artifact has none."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic evidence review; this is triage guidance, not a malware verdict."
+    },
+    "nemotron": {
+      "contradictions": [],
+      "missing_checks": [
+        "Publisher signature or independently verified provenance is absent.",
+        "The model scan did not run on supported files; scan coverage is incomplete.",
+        "model_scan: No supported model/pickle files were found (scanned_files=0, status=NOT_SCANNED)",
+        "review_flags is empty but unsigned=true: should flag for manual review of unsigned artifact"
+      ],
+      "recommended_next_checks": [
+        "Verify publisher identity or document why local attestation is acceptable.",
+        "Provide supported model/pickle files or document why this artifact has none.",
+        "Scan for supported model/pickle files and verify signature status",
+        "Add review_flag 'unsigned_no_scan' if manual review confirms no malicious content",
+        "Verify artifact provenance and intended use case for 'eval-not-scanned' identifier"
+      ],
+      "suggested_escalation": true,
+      "explanation": "The artifact is marked unsigned with no model scan performed (scanned_files=0, status=NOT_SCANNED). The artifact_id 'eval-not-scanned' implies an evaluation context, but without scan evidence the unsigned status requires manual review. Contradiction exists between evaluation implication and unsigned status without supporting evidence.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Add review_flag 'unsigned_no_scan' if manual review confirms no malicious content",
+        "Scan for supported model/pickle files and verify signature status",
+        "Verify artifact provenance and intended use case for 'eval-not-scanned' identifier"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "affected_scanner",
+    "description": "Clean scan but scanner version is affected",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "Scanner version is within the configured affected advisory range."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "The scan may be clean, but the scanner version is within an affected advisory range."
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Upgrade to a fixed scanner version and rerun the scan."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic evidence review; this is triage guidance, not a malware verdict."
+    },
+    "nemotron": {
+      "contradictions": [
+        "The scan may be clean, but the scanner version is within an affected advisory range."
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Upgrade to a fixed scanner version and rerun the scan.",
+        "Verify scanner advisory alignment with scan results"
+      ],
+      "suggested_escalation": true,
+      "explanation": "The artifact has scanner_affected=true and a non-empty advisory (SYNTHETIC-EVAL-001) indicating it is affected, yet the model scan reports status=CLEAN with zero dangerous/suspicious globals and zero infected files. This discrepancy between the advisory and the scan outcome requires manual review to determine if the advisory reflects a false positive, a configuration issue, or a scan limitation.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Verify scanner advisory alignment with scan results"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "digest_change",
+    "description": "Approved artifact digest changed at load time",
+    "policy_decision": "BLOCK",
+    "policy_reasons": [
+      "Artifact digest differs from the approved digest."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "The current artifact digest differs from the approved digest."
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Investigate the digest mismatch; keep the artifact blocked until resolved."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The artifact digest differs from the approved digest; it must remain blocked until investigated. The AI analyst cannot override these signals or the deterministic policy decision."
+    },
+    "nemotron": {
+      "contradictions": [
+        "The current artifact digest differs from the approved digest.",
+        "digest_mismatch is true but model_scan.status is CLEAN and signature_verified is true"
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Investigate the digest mismatch; keep the artifact blocked until resolved.",
+        "Verify the actual digest of the artifact to resolve the digest_mismatch flag"
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The artifact digest differs from the approved digest; it must remain blocked until investigated. The AI analyst cannot override these signals or the deterministic policy decision.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Verify the actual digest of the artifact to resolve the digest_mismatch flag"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "signature_scan_contradiction",
+    "description": "Signature is valid but scanner reports suspicious content",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "PickleScan reported suspicious or dangerous model content; manual review is required."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "The model scanner reported findings that require investigation."
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Review scanner findings and inspect suspicious or dangerous globals."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The model scanner reported findings requiring investigation; the artifact must remain quarantined pending review. The AI analyst cannot override these signals or the deterministic policy decision."
+    },
+    "nemotron": {
+      "contradictions": [
+        "The model scanner reported findings that require investigation."
+      ],
+      "missing_checks": [
+        "No evidence of manual review or policy override justification despite presence of suspicious_globals=2"
+      ],
+      "recommended_next_checks": [
+        "Review scanner findings and inspect suspicious or dangerous globals.",
+        "Verify scan source and timestamp consistency",
+        "Check for conflicting scan results or model version drift",
+        "Review suspicious_globals=2 findings with model owner"
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The model scanner reported findings requiring investigation; the artifact must remain quarantined pending review. The AI analyst cannot override these signals or the deterministic policy decision.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Check for conflicting scan results or model version drift",
+        "Review suspicious_globals=2 findings with model owner",
+        "Verify scan source and timestamp consistency"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "scanner_error",
+    "description": "Scanner failed and cannot provide a clean result",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "Model scan failed; absence of scanner evidence is not a clean result."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [],
+      "missing_checks": [
+        "The model scan failed; scan coverage is incomplete."
+      ],
+      "recommended_next_checks": [
+        "Resolve the scanner error and rerun the scan before clearance."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The model scan failed, so scan coverage is incomplete; the artifact must not be cleared on the basis of this scan. The AI analyst cannot override these signals or the deterministic policy decision."
+    },
+    "nemotron": {
+      "contradictions": [],
+      "missing_checks": [
+        "The model scan failed; scan coverage is incomplete."
+      ],
+      "recommended_next_checks": [
+        "Resolve the scanner error and rerun the scan before clearance."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The model scan failed, so scan coverage is incomplete; the artifact must not be cleared on the basis of this scan. The AI analyst cannot override these signals or the deterministic policy decision.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "unsigned_clean_model",
+    "description": "Clean scan but publisher signature is absent",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "No verified publisher signature is available; hash alone does not establish publisher identity."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [],
+      "missing_checks": [
+        "Publisher signature or independently verified provenance is absent."
+      ],
+      "recommended_next_checks": [
+        "Verify publisher identity or document why local attestation is acceptable."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic evidence review; this is triage guidance, not a malware verdict."
+    },
+    "nemotron": {
+      "contradictions": [],
+      "missing_checks": [
+        "Publisher signature or independently verified provenance is absent.",
+        "No signature verification performed (signature_verified=false)",
+        "No manual review of unsigned artifact despite review_flags being empty",
+        "No hash or checksum comparison to known good baselines"
+      ],
+      "recommended_next_checks": [
+        "Verify publisher identity or document why local attestation is acceptable.",
+        "Run signature verification against trusted key store",
+        "Compare file hash to internal allowlist for eval-unsigned-clean",
+        "Escalate to human analyst for manual review of unsigned artifact"
+      ],
+      "suggested_escalation": true,
+      "explanation": "The artifact eval-unsigned-clean is marked unsigned=true with signature_verified=false yet shows status=CLEAN with 0 infected files. This combination is anomalous: unsigned artifacts should not receive a CLEAN status without additional validation. The empty review_flags list does not mitigate the risk of an unsigned model passing through the pipeline. Manual review and signature verification are required before this artifact can be cleared.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Compare file hash to internal allowlist for eval-unsigned-clean",
+        "Escalate to human analyst for manual review of unsigned artifact",
+        "Run signature verification against trusted key store"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "multiple_review_flags",
+    "description": "Several files require manual review",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "Inventory contains file types requiring review under policy."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "Integrity evidence does not resolve the inventory's script/format review flags."
+      ],
+      "missing_checks": [
+        "The model scan did not run on supported files; scan coverage is incomplete."
+      ],
+      "recommended_next_checks": [
+        "Review flagged files and establish whether each is expected for this artifact.",
+        "Provide supported model/pickle files or document why this artifact has none."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic evidence review; this is triage guidance, not a malware verdict."
+    },
+    "nemotron": {
+      "contradictions": [
+        "Integrity evidence does not resolve the inventory's script/format review flags."
+      ],
+      "missing_checks": [
+        "The model scan did not run on supported files; scan coverage is incomplete.",
+        "file_scan: No files were scanned (scanned_files=0, status=NOT_SCANNED)",
+        "executable_loader_review: review_flags reference loader.py and install.sh but no scan data exists to confirm safety"
+      ],
+      "recommended_next_checks": [
+        "Review flagged files and establish whether each is expected for this artifact.",
+        "Provide supported model/pickle files or document why this artifact has none.",
+        "Run file scan to populate scanned_files and status",
+        "Verify executable_or_loader_script_review flags against actual file contents",
+        "Manually inspect flagged files and document whether their behavior is expected."
+      ],
+      "suggested_escalation": true,
+      "explanation": "The artifact has review_flags indicating executable/script review but zero files were scanned and status is NOT_SCANNED. This creates a gap between flagged concerns and actual scan evidence. The presence of flags without corresponding scan data requires manual verification before the artifact can be cleared.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Manually inspect flagged files and document whether their behavior is expected.",
+        "Run file scan to populate scanned_files and status",
+        "Verify executable_or_loader_script_review flags against actual file contents"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "revoked_artifact",
+    "description": "Previously approved artifact has been revoked",
+    "policy_decision": "BLOCK",
+    "policy_reasons": [
+      "Artifact has been revoked."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "The artifact is marked revoked and must not be treated as trusted."
+      ],
+      "missing_checks": [],
+      "recommended_next_checks": [
+        "Confirm the revocation reason and identify affected agents or deployments."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The artifact is revoked and must remain blocked. The AI analyst cannot override these signals or the deterministic policy decision."
+    },
+    "nemotron": {
+      "contradictions": [
+        "The artifact is marked revoked and must not be treated as trusted.",
+        "artifact_id 'eval-revoked' suggests a revoked evaluation artifact, but model_scan.status is 'CLEAN' and scanner_affected is false"
+      ],
+      "missing_checks": [
+        "No integrity hash provided to verify file contents against the CLEAN status",
+        "No provenance chain showing how the artifact was generated or distributed",
+        "No timestamp or version information to correlate with revocation events"
+      ],
+      "recommended_next_checks": [
+        "Confirm the revocation reason and identify affected agents or deployments.",
+        "Verify integrity hash of the single scanned file",
+        "Check revocation logs for artifact_id 'eval-revoked' to understand revocation reason",
+        "Confirm provenance and distribution chain for the artifact",
+        "Review scanner configuration and advisory status for any missed affected indicators"
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic security safeguards: The artifact is revoked and must remain blocked. The AI analyst cannot override these signals or the deterministic policy decision.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Check revocation logs for artifact_id 'eval-revoked' to understand revocation reason",
+        "Confirm provenance and distribution chain for the artifact",
+        "Review scanner configuration and advisory status for any missed affected indicators",
+        "Verify integrity hash of the single scanned file"
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  },
+  {
+    "case": "stale_scanner_and_missing_scan",
+    "description": "Scanner version is affected and model scan is missing",
+    "policy_decision": "QUARANTINE",
+    "policy_reasons": [
+      "Scanner version is within the configured affected advisory range."
+    ],
+    "rules_only": {
+      "mode": "rules-only (AI disabled or NVIDIA_API_KEY not set)",
+      "contradictions": [
+        "The scan may be clean, but the scanner version is within an affected advisory range."
+      ],
+      "missing_checks": [
+        "The model scan did not run on supported files; scan coverage is incomplete."
+      ],
+      "recommended_next_checks": [
+        "Upgrade to a fixed scanner version and rerun the scan.",
+        "Provide supported model/pickle files or document why this artifact has none."
+      ],
+      "suggested_escalation": true,
+      "explanation": "Deterministic evidence review; this is triage guidance, not a malware verdict."
+    },
+    "nemotron": {
+      "contradictions": [
+        "The scan may be clean, but the scanner version is within an affected advisory range."
+      ],
+      "missing_checks": [
+        "The model scan did not run on supported files; scan coverage is incomplete.",
+        "No signature verification failure detected, but the model scan produced zero scanned files. The absence of supported files should be documented as a check gap."
+      ],
+      "recommended_next_checks": [
+        "Upgrade to a fixed scanner version and rerun the scan.",
+        "Provide supported model/pickle files or document why this artifact has none.",
+        "Verify artifact contents to confirm presence (or absence) of supported model/pickle files.",
+        "Re-run model scan after ensuring required file types are present in the artifact.",
+        "Check if the scanner configuration correctly identifies supported file extensions for this artifact type."
+      ],
+      "suggested_escalation": true,
+      "explanation": "The artifact has scanner_affected=true and signature_verified=true, unsigned=false, yet model_scan reports 0 scanned files with an error indicating no supported model/pickle files were found. This combination is contradictory: if no files were scanned, it is unclear how the scanner determined the artifact is affected. The missing scan data and the affected flag require manual review to resolve whether the artifact is truly affected, the scan configuration is misaligned, or the artifact lacks expected model files.",
+      "mode": "Nemotron API"
+    },
+    "exact_text_only": {
+      "additional_ai_recommendations": [
+        "Check if the scanner configuration correctly identifies supported file extensions for this artifact type.",
+        "Re-run model scan after ensuring required file types are present in the artifact.",
+        "Verify artifact contents to confirm presence (or absence) of supported model/pickle files."
+      ],
+      "rules_recommendations_not_repeated": [],
+      "warning": "Exact wording comparison; paraphrases may be duplicates."
+    }
+  }
+]

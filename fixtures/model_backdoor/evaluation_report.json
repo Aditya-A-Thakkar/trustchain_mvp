@@ -1,0 +1,94 @@
+{
+  "experiment": "controlled single-feature backdoor probe",
+  "format": "trustchain-toy-linear-v1",
+  "clean_model_probe": {
+    "status": "ANALYZED",
+    "file": "clean_model.tcmodel.json",
+    "format": "trustchain-toy-linear-v1",
+    "baseline_class": "ordinary",
+    "probes_run": 2,
+    "probes": [
+      {
+        "feature": "urgent_language",
+        "baseline_class": "ordinary",
+        "triggered_class": "escalate",
+        "class_changed": true,
+        "margin": 0.9,
+        "baseline_margin": 0.5
+      },
+      {
+        "feature": "rare_marker_7f3",
+        "baseline_class": "ordinary",
+        "triggered_class": "ordinary",
+        "class_changed": false,
+        "margin": 0.4,
+        "baseline_margin": 0.5
+      }
+    ],
+    "flagged_features": [],
+    "limitations": [
+      "Only the TrustChain declarative toy linear model format is supported.",
+      "Single-feature probing can miss multi-feature, input-dependent, or low-margin backdoors.",
+      "A suspicious response is a behavioral indicator, not proof of malicious training."
+    ]
+  },
+  "backdoored_model_probe": {
+    "status": "ANALYZED",
+    "file": "backdoored_model.tcmodel.json",
+    "format": "trustchain-toy-linear-v1",
+    "baseline_class": "ordinary",
+    "probes_run": 2,
+    "probes": [
+      {
+        "feature": "urgent_language",
+        "baseline_class": "ordinary",
+        "triggered_class": "escalate",
+        "class_changed": true,
+        "margin": 0.9,
+        "baseline_margin": 0.5
+      },
+      {
+        "feature": "rare_marker_7f3",
+        "baseline_class": "ordinary",
+        "triggered_class": "escalate",
+        "class_changed": true,
+        "margin": 8.5,
+        "baseline_margin": 0.5
+      }
+    ],
+    "flagged_features": [
+      {
+        "feature": "rare_marker_7f3",
+        "baseline_class": "ordinary",
+        "triggered_class": "escalate",
+        "class_changed": true,
+        "margin": 8.5,
+        "baseline_margin": 0.5,
+        "reason": "single_feature_causes_high_margin_class_flip"
+      }
+    ],
+    "limitations": [
+      "Only the TrustChain declarative toy linear model format is supported.",
+      "Single-feature probing can miss multi-feature, input-dependent, or low-margin backdoors.",
+      "A suspicious response is a behavioral indicator, not proof of malicious training."
+    ]
+  },
+  "metrics": {
+    "clean_accuracy": 1.0,
+    "attack_success_rate": 1.0,
+    "clean_examples": 3,
+    "trigger_examples": 10,
+    "target_hits_on_triggered_examples": 10
+  },
+  "detector_result": {
+    "clean_control": "PASS",
+    "backdoored_fixture": "FINDINGS",
+    "true_positive_rate_on_two_fixtures": 1.0,
+    "false_positive_rate_on_two_fixtures": 0.0
+  },
+  "limitations": [
+    "Synthetic declarative linear model, not a neural network.",
+    "Probe toggles one declared feature at a time.",
+    "The controlled fixtures are intentionally separable; these metrics do not estimate real-world detector performance."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "trace_id": "fixture-agent-mismatch-01",
+  "declared_capabilities": {
+    "network_hosts": ["api.example.invalid"],
+    "write_paths": ["/tmp/trustchain-work"],
+    "tools": ["search"]
+  },
+  "events": [
+    {"action": "network", "host": "collector.attacker.invalid"},
+    {"action": "file_write", "path": "/home/user/.ssh/authorized_keys"},
+    {"action": "tool_call", "tool": "shell"}
+  ]
+}

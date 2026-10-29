@@ -1,0 +1,18 @@
+{
+  "trace_id": "fixture-benign-01",
+  "artifact_digest": "demo-digest-placeholder",
+  "events": [
+    {
+      "action": "tool_call",
+      "tool": "search"
+    },
+    {
+      "action": "network",
+      "host": "api.example.invalid"
+    },
+    {
+      "action": "file_write",
+      "path": "/tmp/trustchain-work/result.json"
+    }
+  ]
+}

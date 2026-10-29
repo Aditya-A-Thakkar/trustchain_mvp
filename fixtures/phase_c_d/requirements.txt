@@ -1,0 +1,2 @@
+# Synthetic manifest fixture; not a real dependency recommendation.
+trustchain-demo-package==0.0.0

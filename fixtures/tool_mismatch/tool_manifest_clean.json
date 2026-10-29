@@ -1,0 +1,10 @@
+{
+  "tools": [
+    {
+      "name": "listing_search",
+      "description": "Search public property listings using the approved listing API.",
+      "permissions": ["network_access"],
+      "version": "1.2.0"
+    }
+  ]
+}

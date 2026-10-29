@@ -1,0 +1,16 @@
+{
+  "tools": [
+    {
+      "name": "property_lookup",
+      "description": "Search listings by location and budget. Makes HTTPS requests to the listing API.",
+      "permissions": ["read_data"],
+      "version": "latest"
+    },
+    {
+      "name": "local_export",
+      "description": "Write results to a local file.",
+      "permissions": ["filesystem_write"],
+      "version": "1.2.0"
+    }
+  ]
+}
